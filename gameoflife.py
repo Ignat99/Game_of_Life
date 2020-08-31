@@ -39,10 +39,21 @@ def gol_read():
                 if gol_char == 'O':
 #                   print (gol_i, gol_j)
                    gol_state.add((gol_i, gol_j))
+            gol_field_width = gol_j
             gol_j = 0
+    gol_field_height = gol_i
 
+def gol_print():
+    """ Print ASCII to stdout """
+    for gen_i in xrange(gol_field_height):
+        gol_str = ''
+        for gen_j in xrange(gol_field_width):
+            gol_str = gol_str + '.'
+    print(gen_str + '\n')
 
 gol_state = set()
+gol_field_height = 0
+gol_field_width = 0
 
 gol_read()
 print gol_state
