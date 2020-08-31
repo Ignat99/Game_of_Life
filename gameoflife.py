@@ -72,7 +72,27 @@ gol_state = set()
 (gol_field_height, gol_field_width) = gol_read()
 #print gol_field_height
 
+param =  sys.argv[1]
+gol_cond_s = []
+gol_cond_b = []
+gol_param_array = param.split('S')
+go_s = str(gol_param_array[1])
+#print go_s
+for gol_s in xrange(len(go_s)):
+    gol_cond_s.append(int(go_s[gol_s]))
+#    print gol_cond_s
+
+
+go_b = str(gol_param_array[0]).split('B')[1]
+#print go_b
+for gol_b in xrange(len(go_b) - 1):
+    gol_cond_b.append(int(go_b[gol_b]))
+#    print gol_cond_b
+
+
 for gol_k in range(1):
-    gol_state = advance(gol_state, [3,6,8], [2,4,5])
+    gol_state = advance(gol_state, gol_cond_b, gol_cond_s)
+#    gol_state = advance(gol_state, [3,6,8], [2,4,5])
+#    gol_state = advance(gol_state, [3], [2,3])
 #    print gol_state
     gol_print()
