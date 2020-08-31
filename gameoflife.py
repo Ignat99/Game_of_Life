@@ -49,7 +49,11 @@ def gol_print():
     for gol_i in xrange(gol_field_height):
         gol_str = ''
         for gol_j in xrange(gol_field_width):
-            gol_str = gol_str + '.'
+            if (gol_i, gol_j) in gol_state:
+#                print (gol_i, gol_j)
+                gol_str = gol_str + 'O'
+            else:
+                gol_str = gol_str + '.'
 #            print (gol_i, gol_j)
         print(gol_str + '\n')
 
@@ -57,7 +61,7 @@ gol_state = set()
 (gol_field_height, gol_field_width) = gol_read()
 print gol_state
 
-for gol_k in range(1):
+for gol_k in range(6):
     gol_state = advance(gol_state)
     print gol_state
     gol_print()
