@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 
-""" Game of life implementation """
+""" Game of life implementation with game variation (Life, Morley, etc)"""
 import sys
 import re
 import itertools
@@ -24,23 +24,12 @@ def advance(board, gol_cond_b, gol_cond_s):
     recalc = board | set(itertools.chain(*map(neighbors, board)))
     for point in recalc:
         count = sum((neigh in board) for neigh in neighbors(point))
-#        print count
-#        gol_point = point in board
-#        print gol_point
         result_b = map(lambda b: (count == b and not (point in board)) , gol_cond_b)
         result_s = map(lambda s: (count == s and point in board), gol_cond_s)
-#        print 'b '
-#        print result_b
-#        print 's '
-#        print result_s
         for cur_b in result_b:
             gol_result_b = gol_result_b or cur_b
-#        print gol_result_b
         for cur_s in result_s:
             gol_result_s = gol_result_s or cur_s
-#        print gol_result_s
-#        if count == 3 or (count == 2 and point in board):
-#            newstate.add(point)
 
         if gol_result_s or gol_result_b:
             newstate.add(point)
