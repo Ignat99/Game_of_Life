@@ -2,6 +2,9 @@
 
 *See [Notes for evaluation](#notes-for-evaluation) if you are doing this kata as an evaluation.*
 
+## Milestone 0: Graphical interface for input file generation toad.life
+
+https://github.com/Ignat99/Generator_Game_of_Life
 
 ## Milestone 1: Game of life implementation
 
