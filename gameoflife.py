@@ -33,6 +33,7 @@ def gol_read():
 #        print result
         if result != ['!']:
             gol_i = gol_i + 1
+            gol_field_height = gol_i
             print(line)
             for gol_char in line:
                 gol_j = gol_j + 1
@@ -41,24 +42,22 @@ def gol_read():
                    gol_state.add((gol_i, gol_j))
             gol_field_width = gol_j
             gol_j = 0
-    gol_field_height = gol_i
+    return (gol_field_height, gol_field_width)
 
 def gol_print():
     """ Print ASCII to stdout """
-    for gen_i in xrange(gol_field_height):
+    for gol_i in xrange(gol_field_height):
         gol_str = ''
-        for gen_j in xrange(gol_field_width):
+        for gol_j in xrange(gol_field_width):
             gol_str = gol_str + '.'
-    print(gen_str + '\n')
+#            print (gol_i, gol_j)
+        print(gol_str + '\n')
 
 gol_state = set()
-gol_field_height = 0
-gol_field_width = 0
-
-gol_read()
+(gol_field_height, gol_field_width) = gol_read()
 print gol_state
 
 for gol_k in range(1):
     gol_state = advance(gol_state)
     print gol_state
-#    gol_print()
+    gol_print()
