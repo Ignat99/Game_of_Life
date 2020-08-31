@@ -14,7 +14,9 @@ def neighbors(point):
             yield (gol_x + i, gol_y + j)
 
 def advance(board):
-    """ Next step """
+    """ Next step. And since only True in the dictionary. Just simply a set of coordinates.
+        New state is not needed. We can re-create the list of living cells.
+    """
     newstate = set()
     recalc = board | set(itertools.chain(*map(neighbors, board)))
     for point in recalc:
