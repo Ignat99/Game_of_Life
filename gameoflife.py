@@ -24,7 +24,7 @@ def advance(board, gol_cond_b, gol_cond_s):
     recalc = board | set(itertools.chain(*map(neighbors, board)))
     for point in recalc:
         count = sum((neigh in board) for neigh in neighbors(point))
-        result_b = map(lambda b: (count == b and not (point in board)) , gol_cond_b)
+        result_b = map(lambda b: (count == b and not (point in board)), gol_cond_b)
         result_s = map(lambda s: (count == s and point in board), gol_cond_s)
         for cur_b in result_b:
             gol_result_b = gol_result_b or cur_b
@@ -43,6 +43,9 @@ def gol_read():
     """ Read from stdin  new state """
     gol_i = 0
     gol_j = 0
+    gol_field_height = 0
+    gol_field_widt = 0
+
     for line in sys.stdin:
         result = re.findall(r'^\!', line)
         if result != ['!']:
@@ -67,32 +70,35 @@ def gol_print():
                 gol_str = gol_str + '.'
         print gol_str
 
-gol_state = set()
-#print gol_state
-(gol_field_height, gol_field_width) = gol_read()
-#print gol_field_height
+def gol_cond(gol_str, gol_str_len):
+    """We make input array of condition"""
+    gol_cond = []
+    for gol_n in xrange(gol_str_len):
+        gol_cond.append(int(gol_str[gol_n]))
+    return gol_cond
 
-param =  sys.argv[1]
-gol_cond_s = []
-gol_cond_b = []
-gol_param_array = param.split('S')
-go_s = str(gol_param_array[1])
-#print go_s
-for gol_s in xrange(len(go_s)):
-    gol_cond_s.append(int(go_s[gol_s]))
-#    print gol_cond_s
+if __name__ == "__main__":
+    """Main loop"""
+    gol_cond_s = []
+    gol_cond_b = []
 
+    if len(sys.argv) <= 1:
+        print("Error. Need argument B368/S245")
+        sys.exit(1)
 
-go_b = str(gol_param_array[0]).split('B')[1]
-#print go_b
-for gol_b in xrange(len(go_b) - 1):
-    gol_cond_b.append(int(go_b[gol_b]))
-#    print gol_cond_b
+    gol_param_array = sys.argv[1].split('S')
 
+    gol_state = set()
+    (gol_field_height, gol_field_width) = gol_read()
 
-for gol_k in range(1):
-    gol_state = advance(gol_state, gol_cond_b, gol_cond_s)
-#    gol_state = advance(gol_state, [3,6,8], [2,4,5])
-#    gol_state = advance(gol_state, [3], [2,3])
-#    print gol_state
-    gol_print()
+    go_s = str(gol_param_array[1])
+    len_s = len(go_s)
+    gol_cond_s = gol_cond(go_s, len_s)
+
+    go_b = str(gol_param_array[0]).split('B')[1]
+    len_b = len(go_b) - 1
+    gol_cond_b = gol_cond(go_b, len_b)
+
+    for gol_k in range(1):
+        gol_state = advance(gol_state, gol_cond_b, gol_cond_s)
+        gol_print()
