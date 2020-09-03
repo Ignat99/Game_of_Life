@@ -79,8 +79,8 @@ def gol_cond(gol_str, gol_str_len):
 
 if __name__ == "__main__":
     """Main loop"""
-    gol_cond_s = []
-    gol_cond_b = []
+    gol_cond_s = [] # type: List[bool]
+    gol_cond_b = [] # type: List[bool]
 
     if len(sys.argv) <= 1:
         print("Error. Need argument B368/S245")
@@ -91,13 +91,13 @@ if __name__ == "__main__":
     gol_state = set()
     (gol_field_height, gol_field_width) = gol_read()
 
-    go_s = str(gol_param_array[1])
-    len_s = len(go_s)
+    go_s = str(gol_param_array[1]) # type: str
+    len_s = len(go_s) # type: int
     gol_cond_s = gol_cond(go_s, len_s)
 
-    go_b = str(gol_param_array[0]).split('B')[1]
-    len_b = len(go_b) - 1
-    gol_cond_b = gol_cond(go_b, len_b)
+    go_b = str(gol_param_array[0]).split('B')[1] # type: str
+    len_b = len(go_b) - 1 # type: int
+    gol_cond_b = gol_cond(go_b, len_b) # type: bool
 
     for gol_k in range(1):
         gol_state = advance(gol_state, gol_cond_b, gol_cond_s)
