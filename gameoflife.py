@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding: utf-8
 
 """ Game of life implementation with game variation (Life, Morley, etc)"""
+from __future__ import print_function
 import sys
 import re
 import itertools
@@ -61,19 +62,19 @@ def gol_read():
 
 def gol_print():
     """ Print ASCII to stdout """
-    for gol_i in xrange(1,gol_field_height):
+    for gol_i in range(1,gol_field_height):
         gol_str = ''
-        for gol_j in xrange(1,gol_field_width):
+        for gol_j in range(1,gol_field_width):
             if (gol_i, gol_j) in gol_state:
                 gol_str = gol_str + 'O'
             else:
                 gol_str = gol_str + '.'
-        print gol_str
+        print(gol_str)
 
 def gol_cond(gol_str, gol_str_len):
     """We make input array of condition"""
     gol_cond = []
-    for gol_n in xrange(gol_str_len):
+    for gol_n in range(gol_str_len):
         gol_cond.append(int(gol_str[gol_n]))
     return gol_cond
 
