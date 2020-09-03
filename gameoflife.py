@@ -61,9 +61,9 @@ def gol_read():
 
 def gol_print():
     """ Print ASCII to stdout """
-    for gol_i in xrange(gol_field_height-1):
+    for gol_i in xrange(1,gol_field_height):
         gol_str = ''
-        for gol_j in xrange(gol_field_width-1):
+        for gol_j in xrange(1,gol_field_width):
             if (gol_i, gol_j) in gol_state:
                 gol_str = gol_str + 'O'
             else:
