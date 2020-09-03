@@ -7,14 +7,14 @@ import sys
 import re
 import itertools
 
-def neighbors(point):
+def neighbors(point): # Iterable[int]
     """ What we have around """
     gol_x, gol_y = point
     for i, j in itertools.product(range(-1, 2), repeat=2):
         if any((i, j)):
             yield (gol_x + i, gol_y + j)
 
-def advance(board, gol_cond_b, gol_cond_s):
+def advance(board, gol_cond_b, gol_cond_s) -> list:
     """ Next step. And since only True in the dictionary. Just simply a set of coordinates.
         New state is not needed. We can re-create the list of living cells.
     """
@@ -40,7 +40,7 @@ def advance(board, gol_cond_b, gol_cond_s):
 
     return newstate
 
-def gol_read():
+def gol_read() -> list:
     """ Read from stdin  new state """
     gol_i = 0
     gol_j = 0
@@ -60,7 +60,7 @@ def gol_read():
             gol_j = 0
     return (gol_field_height, gol_field_width)
 
-def gol_print():
+def gol_print() -> None:
     """ Print ASCII to stdout """
     for gol_i in range(1,gol_field_height):
         gol_str = ''
@@ -71,7 +71,7 @@ def gol_print():
                 gol_str = gol_str + '.'
         print(gol_str)
 
-def gol_cond(gol_str, gol_str_len):
+def gol_cond(gol_str, gol_str_len) -> list:
     """We make input array of condition"""
     gol_cond = []
     for gol_n in range(gol_str_len):
@@ -87,18 +87,18 @@ if __name__ == "__main__":
         print("Error. Need argument B368/S245")
         sys.exit(1)
 
-    gol_param_array = sys.argv[1].split('S')
+    gol_param_array = sys.argv[1].split('S') # type: List[str]
 
-    gol_state = set()
-    (gol_field_height, gol_field_width) = gol_read()
+    gol_state = set() # type: list
+    (gol_field_height, gol_field_width) = gol_read() # type: List[int]
 
     go_s = str(gol_param_array[1]) # type: str
     len_s = len(go_s) # type: int
-    gol_cond_s = gol_cond(go_s, len_s)
+    gol_cond_s = gol_cond(go_s, len_s) # type: list
 
     go_b = str(gol_param_array[0]).split('B')[1] # type: str
     len_b = len(go_b) - 1 # type: int
-    gol_cond_b = gol_cond(go_b, len_b) # type: bool
+    gol_cond_b = gol_cond(go_b, len_b) # type: List[bool]
 
     for gol_k in range(1):
         gol_state = advance(gol_state, gol_cond_b, gol_cond_s)
