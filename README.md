@@ -154,3 +154,8 @@ Keep in mind:
 
 ### Language-specific notes
 - If you choose **Python**, please use type annotations.
+
+```sh
+sudo python3 -m pip install mypy
+python3 -m mypy ./gameoflife.py
+```
